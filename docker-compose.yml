@@ -1,0 +1,29 @@
+version: '3'
+services:
+  web-dev:
+    build:
+      context: .
+      target: development
+    ports:
+      - "5000:5000"
+    volumes:
+      - sqlite_dev_data:/app/instance
+    environment:
+      - FLASK_ENV=development
+    restart: unless-stopped
+
+  web-prod:
+    build:
+      context: .
+      target: production
+    ports:
+      - "5001:5000"
+    volumes:
+      - sqlite_prod_data:/app/instance
+    environment:
+      - FLASK_ENV=production
+    restart: unless-stopped
+
+volumes:
+  sqlite_dev_data:
+  sqlite_prod_data: 
