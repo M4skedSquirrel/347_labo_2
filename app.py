@@ -5,7 +5,7 @@ from models import db, User, Message
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'votre_clé_secrète'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///guestbook.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dev_guestbook.db'
 
 db.init_app(app)
 login_manager = LoginManager()
