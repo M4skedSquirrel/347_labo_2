@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import db, User, Message
@@ -115,6 +115,20 @@ def logout():
     logout_user()
     flash('Vous êtes déconnecté')
     return redirect(url_for('index'))
+
+@app.before_first_request
+def clear_session():
+    if os.environ.get('FLASK_ENV') != 'development':
+        session.clear()
+
+@app.before_first_request
+def auto_login_dev():
+    if os.environ.get('FLASK_ENV') == 'development' and not current_user.is_authenticated:
+        # Chercher l'utilisateur admin de dev
+        dev_admin = User.query.filter_by(username='admin@test.ch').first()
+        if dev_admin:
+            login_user(dev_admin)
+            flash('Mode développement : Connexion automatique en tant qu\'admin')
 
 if __name__ == '__main__':
     with app.app_context():

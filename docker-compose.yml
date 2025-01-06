@@ -9,6 +9,7 @@ services:
     volumes:
       - .:/app
       - sqlite_dev_data:/app/instance
+      - /app/flask_session
     environment:
       - FLASK_ENV=development
     restart: unless-stopped
@@ -22,6 +23,7 @@ services:
     volumes:
       - .:/app
       - sqlite_prod_data:/app/instance
+      - /app/flask_session
     environment:
       - FLASK_ENV=production
     restart: unless-stopped
