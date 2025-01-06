@@ -58,6 +58,62 @@ def add_prod_data():
         {
             'title': 'Moment mémorable',
             'content': 'Un grand merci pour cette expérience unique. Tout était parfaitement orchestré.'
+        },
+        {
+            'title': 'Superbe organisation',
+            'content': 'Tout a été pensé dans les moindres détails. Une organisation irréprochable!'
+        },
+        {
+            'title': 'Équipe au top',
+            'content': 'Une équipe dynamique et professionnelle qui sait recevoir. Bravo à tous!'
+        },
+        {
+            'title': 'Expérience inoubliable',
+            'content': 'Ces moments resteront gravés dans nos mémoires. Merci pour tout!'
+        },
+        {
+            'title': 'Accueil chaleureux',
+            'content': 'Nous avons été reçus comme des rois. L\'accueil était parfait.'
+        },
+        {
+            'title': 'Prestations exceptionnelles',
+            'content': 'La qualité des prestations était au rendez-vous. Une expérience à renouveler!'
+        },
+        {
+            'title': 'Soirée magique',
+            'content': 'Une soirée qui restera dans les annales. Tout était magique!'
+        },
+        {
+            'title': 'Recommandation sincère',
+            'content': 'Je recommande sans hésitation. Une valeur sûre!'
+        },
+        {
+            'title': 'Personnel attentionné',
+            'content': 'Le personnel était aux petits soins. Un service irréprochable!'
+        },
+        {
+            'title': 'Ambiance extraordinaire',
+            'content': 'L\'ambiance était au rendez-vous. Un moment de partage exceptionnel!'
+        },
+        {
+            'title': 'Satisfaction totale',
+            'content': 'Rien à redire, tout était parfait de A à Z. Bravo!'
+        },
+        {
+            'title': 'Merci infiniment',
+            'content': 'Un grand merci pour ces moments de bonheur partagés.'
+        },
+        {
+            'title': 'Événement réussi',
+            'content': 'Un événement parfaitement réussi qui laissera de beaux souvenirs.'
+        },
+        {
+            'title': 'Qualité premium',
+            'content': 'Des prestations de grande qualité qui méritent d\'être soulignées.'
+        },
+        {
+            'title': 'Ravie de l\'expérience',
+            'content': 'Une expérience enrichissante et pleine de surprises. À refaire!'
         }
     ]
 
