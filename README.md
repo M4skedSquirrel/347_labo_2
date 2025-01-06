@@ -88,8 +88,8 @@ Résultat dans le navigateur :
 **Développement**
 - URL : http://localhost:5000
 - Auto-login apres un login initial
-   user : admin@test.ch
-   password : admin
+   - user : admin@test.ch
+   - password : admin
 - Mode debug activé
 - Base de données : dev_guestbook.db
 - 3 utilisateurs de test
@@ -98,12 +98,12 @@ Résultat dans le navigateur :
 **Production**
 - URL : http://localhost:5001
 - Pas d'auto-login
-   compte admin :
-      user : admin@example.com
-      password : adminPass123
-   compte user :
-      user :john.doe@example.com
-      password : userPass123
+   - compte admin :
+      - user : admin@example.com
+      - password : adminPass123
+   - compte user :
+      - user :john.doe@example.com
+      - password : userPass123
 - Mode debug désactivé
 - Base de données : prod_guestbook.db
 - 10 utilisateurs réalistes
