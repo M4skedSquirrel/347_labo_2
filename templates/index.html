@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Messages</h1>
+<div class="messages">
+    {% for message in messages %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">{{ message.title }}</h5>
+            <p class="card-text">{{ message.content }}</p>
+            <p class="card-text"><small class="text-muted">Par {{ message.author.username }} le {{ message.created_at.strftime('%d/%m/%Y') }}</small></p>
+            {% if current_user.is_authenticated and (current_user.role == 'admin' or current_user.id == message.user_id) %}
+            <a href="{{ url_for('edit_message', id=message.id) }}" class="btn btn-primary">Modifier</a>
+            <a href="{{ url_for('delete_message', id=message.id) }}" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr?')">Supprimer</a>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %} 
