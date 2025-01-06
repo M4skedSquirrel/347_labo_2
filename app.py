@@ -2,10 +2,16 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import db, User, Message
+import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'votre_clé_secrète'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dev_guestbook.db'
+
+# Utiliser la DB de prod ou dev selon l'environnement
+if os.environ.get('FLASK_ENV') == 'production':
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///prod_guestbook.db'
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dev_guestbook.db'
 
 db.init_app(app)
 login_manager = LoginManager()

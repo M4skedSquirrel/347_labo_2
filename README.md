@@ -163,3 +163,44 @@ python app.py
 - Les fichiers de base de données sont ignorés par Git
 - L'environnement de développement inclut des données de test
 - L'environnement de production contient des données réalistes
+
+
+## Création des bases de données
+
+### Base de données de développement
+1. Lancer l'environnement de développement (Linux/MacOS):
+   ```bash
+   export FLASK_ENV=development
+   ```
+
+   ou 
+
+1. Lancer l'environnement de développement (Windows):
+   ```bash
+   set FLASK_ENV=development
+   ```
+2. Exécuter le script de création :
+   ```bash
+   python addDataDevDb.py
+   ```
+3. Vérifie la création des comptes de test et messages
+
+### Base de données de production
+1. Lancer l'environnement de production (Linux/MacOS):
+   ```bash
+   export FLASK_ENV=production
+   ```
+
+   ou
+
+1. Lancer l'environnement de production (Windows):
+   ```bash
+   set FLASK_ENV=production
+   ```
+
+2. Exécuter le script de création :
+   ```bash
+   python addDataProdDb.py
+   ```
+3. Vérifie la création des comptes utilisateurs et messages de démonstration
+4. Changer les mots de passe par défaut des comptes admin

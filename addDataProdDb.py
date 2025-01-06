@@ -1,8 +1,13 @@
-from app import app, db
-from models import User, Message
+from models import User, Message, db
 from werkzeug.security import generate_password_hash
 from datetime import datetime, timedelta
 import random
+from flask import Flask
+
+# Création d'une nouvelle instance Flask pour la production
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///prod_guestbook.db'
+db.init_app(app)
 
 def add_prod_data():
     # Création des utilisateurs
