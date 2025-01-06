@@ -26,7 +26,7 @@ COPY addDataDevDb.py .
 EXPOSE 5000
 
 # Commande pour le développement
-CMD ["sh", "-c", "python addDataDevDb.py && python app.py"]
+CMD ["python", "app.py"]
 
 # Stage de production
 FROM base as production
@@ -42,4 +42,4 @@ COPY addDataProdDb.py .
 EXPOSE 5000
 
 # Commande pour la production
-CMD ["sh", "-c", "python addDataProdDb.py && python app.py"] 
+CMD ["python", "app.py"] 
