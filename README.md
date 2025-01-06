@@ -1,206 +1,102 @@
 # Livre d'Or - Application Flask
 
-## Structure du Projet
+## 1. Structure du Projet
 
+### Arborescence
 ```bash
 
 livre_dor/
 ├── instance/
-│   ├── dev.db        # Base de données de développement
-│   └── prod.db       # Base de données de production
-├── static/
-│   └── style.css     # Styles CSS de l'application
+│   ├── dev_guestbook.db    # Base de données de développement
+│   └── prod_guestbook.db   # Base de données de production
 ├── templates/
-│   ├── base.html     # Template de base
-│   ├── index.html    # Page principale
-│   ├── login.html    # Page de connexion
-│   └── register.html # Page d'inscription
-├── .env              # Variables d'environnement
-├── .gitignore        # Fichiers ignorés par Git
-├── app.py           # Application principale
-├── config.py        # Configuration de l'application
-└── requirements.txt  # Dépendances du projet
+│   ├── index.html         # Page principale
+│   ├── login.html         # Page de connexion
+│   └── register.html      # Page d'inscription
+├── app.py                 # Application principale
+├── models.py             # Modèles de données
+├── addDataDevDb.py       # Script de données de dev
+├── addDataProdDb.py      # Script de données de prod
+├── Dockerfile           # Configuration Docker
+├── docker-compose.yml   # Configuration Docker Compose
+└── requirements.txt     # Dépendances
 
 ```
 
-## Configuration
-
-### Environnement de Développement
-```bash
-export FLASK_ENV=development
-```
-
-### Environnement de Production
-```bash
-export FLASK_ENV=production
-```
-
-## Bases de Données
-
-### Base de données de développement (dev.db)
-
-#### Utilisateurs
-1. **Admin**
-   - Email: admin@test.ch
-   - Password: admin
-   - Role: admin
-
-2. **User1**
-   - Email: user1@test.ch
-   - Password: user1
-   - Role: user
-
-3. **User2**
-   - Email: user2@test.ch
-   - Password: user2
-   - Role: user
-
-#### Messages de test
-- Messages de bienvenue de l'admin
-  - "Bienvenue sur le Livre d'Or"
-  - "Règles de modération"
-
-- Messages de User1
-  - "Premier message"
-  - "Super initiative"
-
-- Messages de User2
-  - "Bonjour à tous"
-  - "Question"
-  - "Merci pour les réponses"
-
-### Base de données de production (prod.db)
-
-#### Utilisateurs
-1. **Admin Principal**
-   - Email: admin@production.ch
-   - Password: admin_secure_2024
-   - Role: admin
-
-2. **Moderateur**
-   - Email: mod@production.ch
-   - Password: mod_2024
-   - Role: admin
-
-3. **Jean Dupont**
-   - Email: jean@example.com
-   - Password: user123
-   - Role: user
-
-4. **Marie Martin**
-   - Email: marie@example.com
-   - Password: user456
-   - Role: user
-
-5. **Pierre Durant**
-   - Email: pierre@example.com
-   - Password: user789
-   - Role: user
-
-#### Messages
-1. **Admin Principal**
-   - "Annonce Importante" (01/01/2024)
-   - "Mise à jour" (01/02/2024)
-   - "Événement à venir" (01/03/2024)
-
-2. **Moderateur**
-   - "Règlement" (02/01/2024)
-   - "Maintenance prévue" (10/02/2024)
-   - "Rappel" (05/03/2024)
-
-3. **Jean Dupont**
-   - "Premier Retour" (03/01/2024)
-   - "Retour d'expérience" (05/02/2024)
-
-4. **Marie Martin**
-   - "Question Technique" (04/01/2024)
-   - "Remerciements" (15/02/2024)
-
-5. **Pierre Durant**
-   - "Suggestion" (05/01/2024)
-   - "Idée" (20/02/2024)
-
-## Fonctionnalités
-
-- Système d'authentification complet
+### 1.1 Fonctionnalités
+- Authentification utilisateur (login/register/logout)
 - Gestion des rôles (admin/user)
-- CRUD des messages
-- Interface responsive
-- Messages flash pour les notifications
-- Protection des routes
+- CRUD des messages du livre d'or
+- Auto-login en développement (apres une première connexion lors de l'installation)
 - Séparation dev/prod
 
-## Installation
+### 1.2 Installation et Exécution
 
-1. Créer un environnement virtuel :
-```bash
-python -m venv venv
-source venv/bin/activate  # Linux/MacOS
-venv\Scripts\activate     # Windows
+**Prérequis**
+- Docker
+- Docker Compose
+
+**Lancement en développement**
+``` bash
+# Construction et démarrage
+docker-compose up web-dev
+
+# Initialisation de la base de données (dans un autre terminal)
+docker-compose exec web-dev python addDataDevDb.py
 ```
 
-2. Installer les dépendances :
-```bash
-pip install -r requirements.txt
+**Lancement en production**
+``` bash
+# Construction et démarrage
+docker-compose up web-prod
+
+# Initialisation de la base de données (dans un autre terminal)
+docker-compose exec web-prod python addDataProdDb.py
 ```
 
-3. Configurer l'environnement :
-```bash
-# Développement
-export FLASK_ENV=development
+### 1.3 Architecture Générale
 
-# Production
-export FLASK_ENV=production
+**Technologies**
+- Frontend : HTML, Jinja2 Templates
+- Backend : Python Flask
+- Base de données : SQLite
+- ORM : SQLAlchemy
+- Authentification : Flask-Login
+
+**Architecture Docker**
+- Base commune : python:3.9-slim
+- Conteneur dev : 
+  - Port 5000
+  - Auto-login admin
+  - Debug activé
+- Conteneur prod :
+  - Port 5001
+  - Pas d'auto-login
+  - Debug désactivé
+
+### 1.4 Environnements
+
+**Développement**
+- URL : http://localhost:5000
+- Auto-login avec admin@test.ch
+- Mode debug activé
+- Base de données : dev_guestbook.db
+- 3 utilisateurs de test
+- 10 messages de test
+
+**Production**
+- URL : http://localhost:5001
+- Pas d'auto-login
+- Mode debug désactivé
+- Base de données : prod_guestbook.db
+- 10 utilisateurs réalistes
+- 30 messages de démonstration
+
+**Vérification des environnements**
+``` bash
+# Vérifier l'environnement de dev
+curl http://localhost:5000  # Devrait montrer une session admin active
+
+# Vérifier l'environnement de prod
+curl http://localhost:5001  # Devrait demander une connexion
 ```
-
-4. Lancer l'application :
-```bash
-python app.py
-```
-
-## Notes
-- Les mots de passe de production doivent être changés lors du déploiement
-- Les fichiers de base de données sont ignorés par Git
-- L'environnement de développement inclut des données de test
-- L'environnement de production contient des données réalistes
-
-
-## Création des bases de données
-
-### Base de données de développement
-1. Lancer l'environnement de développement (Linux/MacOS):
-   ```bash
-   export FLASK_ENV=development
-   ```
-
-   ou 
-
-1. Lancer l'environnement de développement (Windows):
-   ```bash
-   set FLASK_ENV=development
-   ```
-2. Exécuter le script de création :
-   ```bash
-   python addDataDevDb.py
-   ```
-3. Vérifie la création des comptes de test et messages
-
-### Base de données de production
-1. Lancer l'environnement de production (Linux/MacOS):
-   ```bash
-   export FLASK_ENV=production
-   ```
-
-   ou
-
-1. Lancer l'environnement de production (Windows):
-   ```bash
-   set FLASK_ENV=production
-   ```
-
-2. Exécuter le script de création :
-   ```bash
-   python addDataProdDb.py
-   ```
-3. Vérifie la création des comptes utilisateurs et messages de démonstration
-4. Changer les mots de passe par défaut des comptes admin
