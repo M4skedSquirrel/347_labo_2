@@ -61,7 +61,7 @@ La commande "docker-compose exec web-prod python addDataProdDb.py
 " n'est pas censé ête utilisé dans le monde professionnel, son utilisation est rendue obligatoire pour pouvoir simuler une connexion à une base de données de production.
 ```
 Résultat dans le navigateur :
-![image](./.images/2 DB 0 connexion.png)
+![image](./.images/2_DB_0_connexion.png)
 
 ### 1.3 Architecture Générale
 
@@ -110,7 +110,7 @@ Résultat dans le navigateur :
 - 20 messages de démonstration
 
 Résultat dans le navigateur :
-![image](./.images/2 DB 2 connexions.png)
+![image](./.images/2_DB_2_connexions.png)
 
 on peut voir à gauche un compte admin qui peut modifier et/ou supprimer les messages
 et à droite un compte user qui peut uniquement lire les messages...
